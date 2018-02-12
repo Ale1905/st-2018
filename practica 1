@@ -1,0 +1,36 @@
+###Airpassengers###
+install.packages ("forecast")
+require (forecast)
+View (AirPassengers)
+
+help ("AirPassengers")
+class (AirPassengers) #preguntamos a r que tipo de datos es AirPassengers
+start (AirPassengers) ### preguntamos cuando inicia la serie de tiempo
+print (AirPassengers)
+length (AirPassengers)### para saber cuantos datos tiene
+head (AirPassengers, n=8)# muestra los primeros 8 datos de la serie de tiempo
+tail (AirPassengers, n=8)# muestra los ultimos 8 datos
+plot (AirPassengers)
+plot (AirPassengers, xlab ="Años", ylab="Número de pasajeros", type="b")
+
+
+###ejercicio en clase####
+###de la pagina del inegi bajar la tasa de informalidad laboral
+#en valores relativos a nivel nacional, todos los trimestres desde 2005 al 2017
+#esta base la importan a r y la declaran serie de tiempo con
+#el inicio, fin y frecuencia de la st
+#una vez que hayan declarado la serie usar la función
+#print, length, heae y tail (con 10 datos) y explicarlo
+#graficar la serie de tiempo con tres tipos de graficas diferentes
+#y tres colores, ademas investigar y usar las funciones
+#time, deltat, cycle y frequency y explicar para que sirven
+lab<-read.csv("C://Users//USUARIO//Documents//lab.csv")
+labts<-ts(lab, frequency=4, start=(2005))
+start(labts)
+end(labts)
+print(labts)
+length(labts)
+head(labts, n=10 )
+tail(labts, n=10)
+plot(labts)
+plot(labts, xlab="años", ylab="poblacion", type = "o", col = 254)
