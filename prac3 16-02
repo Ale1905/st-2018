@@ -1,0 +1,49 @@
+aa<-AirPassengers
+plot(aa)
+plot (aggregate (aa)) # con el aggregate se muestra la tendencia de la serie de tiempo
+boxplot (aa~cycle (aa))# se expone una grafica de cajas por periodo de la st
+
+deso <- read.csv("C://Users//USUARIO//Desktop//desocupa.csv")
+desots<- ts (deso, frequency=4, start= (2005))
+deseanual <-aggregate (desots)/4
+x11()#para abrir una ventana 
+layout(1:2)#abrir dos graficas en una ventana
+plot(desots)
+plot(deseanual)
+
+deso1<-window(desots, start=c(2008,2),end=c(2015,4))# window corta la serie de tiempo
+
+tas<-read.csv("C://Users//USUARIO//Desktop//tasas.csv")
+parcialts <- ts (tas [ ,1],frequency=4, start=2005)
+asalariadots<-ts(tas[,2],frequency=4,start=2005)
+til1ts<-ts(tas[,3],frequency=4, start=2005)
+multiple<- ts.intersect(parcialts,asalariadots,til1ts)#declaramos una st multiple en r
+plot(multiple)
+
+###ejercicio######
+###Obtengan (de donde quieran) 4 series de tiempo con minimo 30 datos
+#las series de tiempo tienen que tener sustento para compararlas
+### una vez que obtengan estas base tiene que
+#1) importarlas, declarlas como serie de tiempo(separadas)
+# graficarlas, despues crear una serie de tiempo multiple y graficarlas
+# como serie de tiempo multiple
+# despues dividir dos de estas series de tiempo en 3 periodos de intervalos
+#iguales
+### por ultimo, eligen 2 series de tiempo y apliquen el aggregate
+# para conocer su tendencia y hacer las graficas de cajas e interpretar
+#los periodos de estas series
+
+ejercicio<-read.csv("C://Users//USUARIO//Documents//ejer.csv")
+desots <- ts (ejercicio [ ,1],frequency=4, start=2005)
+subocuts<-ts(ejercicio[,2],frequency=4,start=2005)
+conts<-ts(ejercicio[,3],frequency=4, start=2005)
+til2ts<-ts(ejercicio[,4], frequency=4, start=2005)
+x11()#para abrir una ventana 
+layout(1:4)#abrir dos graficas en una ventana
+plot(desots)
+plot(subocuts)
+plot(conts)
+plot(til2ts)
+multiple<- ts.intersect(desots, subocuts, conts, til2ts)#declaramos una st multiple en r
+plot.ts(multiple)
+ejercicio1<--window(desots, start=c(2008,2),end=c(2015,4))
