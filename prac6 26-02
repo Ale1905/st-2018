@@ -1,0 +1,62 @@
+install.packages ("fpp")#bajamos la paqueteria
+install.packages ("forecast")
+require (fpp)#la mandamos llamar a nuestra cesion r
+require (forecast)
+deso<-read.csv ("C://Users//USUARIO//Desktop//desocupa.csv")
+tsdeso<- ts (deso, frequency =4, start=2005)
+tsdeso0<- ts (deso [1:52,], frequency=4, start=2005)
+#tsdeso1<- ts(as.vector())
+a0<- decompose (tsdeso0)
+names(a0)
+a1<-stl(tsdeso0, s.window=4)
+names (a1)
+a1$time.series
+x11()
+plot(tsdeso0, col="blue",main="desocupacion trimestral", ylab="tasa de desocupados",xlab="años")
+lines(a1$time.series[,2],col="red",ylab="tendencia")
+#la grafica muestra el componente tendencia en rojo y datos originales en azul
+#la tendencia muestra movimiento sobre toda la serie
+#ignorando la estacionalidad y pequeñas fluctuaciones aleatorias
+x11()
+plot(a1)
+#muestra una descomposicion aditiva, el metodo que se uso para descomponer es el stl()
+#3 estacionalidad#3
+#ahora para ver la estacionalidad graficamente podriamos ver graficas
+#estacionales para esto hay una funcion que nos permita ver
+#lo anterior se utiliza la funcion monthplot ()
+x11()
+monthplot (a1$time.series[,"seasonal"],main="", ylab="seasonal")
+#si el componente estacional es eleiminado de la serie de tiempo se le
+x11()
+plot(tsdeso0,col="brown",main="tasa de desocupacion",xlab="años",)
+lines(seasadj(a1),col="black",ylab="ajuste estacional")
+#en esta grafica se puede observar que xse mantiene la tendencia sin embargo los picos
+#en periodos constantes
+# las series desestacionalizadas mantienen el componente tendencia y aleatorio
+#por lo que son series con algunos cambios importantes que resultan confusos,
+#por lo que es importante ser cuidadosos en estoa analisis
+
+############ejercicio##########
+#escoger una serie de tiempo y realicen lo siguiente:
+#1) descompongan la serie con la funcion stl y planteen esta descomposicion
+#con uno de los datos que les arroje
+#2) grafique de esta serie el componente estacional y el componente tendencia
+#(dos gtaficas)...en estas graficas usar la funcion lines
+##3) eliminen el componente estacional y grafiquenlo... comprueben en una ecuacion
+#la formula del modelo aditivo eliminando estacionalidad....
+infor<-read.csv("C://Users//USUARIO//Documents//infor.csv")
+tsinfor<-ts(infor, frequency=4,start=2005)
+tsinfor0<- ts (infor [1:51,], frequency=4, start=2005)
+b0<- decompose (tsinfor0)
+names(b0)
+b1<-stl(tsinfor0, s.window=4)
+names (b1)
+b1$time.series
+x11()
+plot(tsinfor0, col="red",main="informalidad trimestral", ylab="tasa de informalidad",xlab="años")
+lines(b1$time.series[,2],col="blue",ylab="estacional")
+x11()
+plot(tsinfor0, col="red",main="informalidad trimestral", ylab="tasa de informalidad",xlab="años")
+lines(b1$time.series[,3],col="blue",ylab="tendencia")
+
+yt=st+tt+et..... 59.1=(-.385770556+59.72840+(-.2426287558))
