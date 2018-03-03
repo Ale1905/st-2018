@@ -1,0 +1,27 @@
+###tarea
+#bajar el PIB de México desde 1950-2015 (Tasa de crecimiento anual del PIB)
+#2dividir grafica en dos series de tiempo
+#1. 1950-1980
+#2. 1981-2015
+#3 hacer una grafica generalde la ST(todo el periodo)
+#4 Mostrar las tres gráficas en una misma ventana, con titulo principal, etiqueta en el eje x,
+# eje y, también mostrar subtitulos (de cada gráfica), en colores diferentes.
+#5 Descomponerlas tres ST y comprobarque la serie es igual a la tendencia, estacionalidad y
+# aleatoriedad en el año 1980, 2000 y 2015.
+#6 Analizare interpretarestas gráficas (análisis asociado a aspectos económicos
+# y politicos de cada año (periodo)
+
+pib<- read.csv("C://Users//Alejandra//Documents//pib.csv")
+tspib0<-ts(pib,start=1961,end=2016)
+tspib1<-ts(pib,start=1961,end=1980)
+tspib2<-ts(pib,start=1981,end=2016)
+plot(tspib0,col=5,xlab="Periodo 1961-2016",ylab="Porcentaje",main="Crecimiento Anual",sub="Fuente:https://datos.bancomundial.org/indicador/NY.GDP.MKTP.KD.ZG?locations=MX")
+x11()
+layout(1:3)
+plot(tspib0,col=5,xlab="Periodo 1961-2016",ylab="Porcentaje",main="Crecimiento Anual",sub="Fuente:https://datos.bancomundial.org/indicador/NY.GDP.MKTP.KD.ZG?locations=MX")
+plot(tspib1,col=6,xlab="Periodo 1961-1980",ylab="Porcentaje",main="Crecimiento Anual",sub="Fuente:https://datos.bancomundial.org/indicador/NY.GDP.MKTP.KD.ZG?locations=MX")
+plot(tspib2,col=7,xlab="Periodo 1981-2016",ylab="Porcentaje",main="Crecimiento Anual",sub="Fuente:https://datos.bancomundial.org/indicador/NY.GDP.MKTP.KD.ZG?locations=MX")
+points(1995,-5.7586,pch=10,col=1)
+text(1995,-5.7586,labels="Crisis 1995")
+points(2009,-4.700338863,pch=10,col=1)
+text(2009,-4.700338863,labels="Crisis 2009")
