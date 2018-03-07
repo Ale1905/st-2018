@@ -1,0 +1,35 @@
+####---MODELOS LINEALES PARA PRONOSTICAR---####
+# Son la aplicacion de pronosticos lineales como los metodos de la media, el ingenuo, el ingenuo estacional y el de deriva el pronostico
+###-ingenuo
+#esta basado en la ultima o0bservacion que arroja la st.
+#es decir este pronostico asume que la observacion mas importante es la ultima
+#funcion en r--> naive(serie,h=num pronosticos) h=numero de pronosticos que requiero
+###-metodo de la media
+#este metodo le da el mismo peso a todos los datos u observaciones, se asume con este metodo que todaslas
+#observaciones tienen la misma importancia por lo que el pronostico es un promedio de todas las observaciones
+#funcion en r-->meanf(serie,h=numero de pronosticos)
+###-ingenuo estacional
+#este metodo se utiliza en st con alta estacionalidad este proceso consiste en darle el mayor peso o la
+#mayor ponderacion al dato del mismo periodo en el año anterior, p.ejm. trimestre 2 del 2005 es igual al trimestre 2 del 2006
+#funcion en r-->snaive(serie , h=numero de pronosticos)
+###-metodo de la deriva
+#este metodo consisite en que el pronostico puede incrementar o reducirse sobre el tiempo, dependiendo
+#del promedio de los cambios historicos de la st
+#funcion en r--> rwf(serie, h=num de pronostico, drift=TRUE)
+#ejercicio pib
+#ejercicio
+des0<-read.csv("C://Users//USUARIO//Desktop//desocupa.csv")
+dests<- ts(des0, start=2005,frequency=4)
+install.packages ("fpp")
+require(fpp)
+desocmod1<-meanf(dests,h=10)
+desocmod2<-naive(dests,h=10)
+desocmod3<-snaive(dests,h=10)
+desocmod4<-rwf(dests, h=10, drift=TRUE)
+x11()
+plot(desocmod1, main="tasa de desocupacion trimestral", col ="green")
+lines(desocmod1$mean,col="green")
+lines(desocmod2$mean,col="black")
+lines(desocmod3$mean,col="pink")
+lines(desocmod4$mean,col="orange")
+legend("topleft",lty=1,col=c("green","black","pink","orange"),legend=c("media","ingenuo","ingenuo estacional","deriva"))  
