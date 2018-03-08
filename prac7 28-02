@@ -1,0 +1,14 @@
+crim1<-c(12632,13607,12160,13335,14553,14654,12791,11923,10225,9847)
+tscrim<-ts(crim1,start=1980)
+ma(tscrim,order=5)
+#time series
+#start=1980
+#end=1989
+frequency=1
+#[1]NA NA 13257.4 13661.8 13498.6 13451.2 12829.2 11888.0
+#[9]NA NA
+ma5crim<-c(NA,NA,13257.4,13661.8,13498.6,13451.2,12829.2,11888.0,NA,NA)
+macrim<-data.frame(crim1,ma5crim)
+plot(tscrim,main="crimen México orden 5", ylab="millones de personas",xlab="años", lines(ma(tscrim,5),col="red"))
+plot(tscrim,main="crimen México orden 3", ylab="millones de personas",xlab="años", lines(ma(tscrim,3),col="red"))
+plot(tscrim,main="crimen México orden 4", ylab="millones de personas",xlab="años", lines(ma(tscrim,4),col="red"))
