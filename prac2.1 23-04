@@ -1,0 +1,30 @@
+pib<- read.csv("C:/Users/USUARIO/Desktop/pib.csv", header = FALSE)
+pibt<- ts (pib,start=1961, frequency=1 )
+require(fpp)
+mod1<-auto.arima(pibt,seasonal=F)
+mod1
+x11()
+plot(forecast (mod1, h= 10))
+
+
+
+#APPLE
+apple<- read.csv("C:/Users/USUARIO/Downloads/apple.csv")
+applets<- ts (apple,start=2017, frequency=252 )
+require(fpp)
+mod1<-auto.arima(applets,seasonal=F)
+mod1
+x11()
+plot(forecast (mod1, h= 10))
+#el modelo arima no es bueno para pronosticar las acciones de apple
+
+
+
+#tasa de asalariado
+asa<- read.csv("C:/Users/USUARIO/Downloads/apple.csv")
+asats<- ts (asa,start=2017, frequency=252 )
+require(fpp)
+mod1<-auto.arima(applets,seasonal=F)
+mod1
+x11()
+plot(forecast (mod1, h= 10))
