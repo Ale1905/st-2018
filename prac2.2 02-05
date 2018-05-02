@@ -1,0 +1,113 @@
+bimbo<-read.csv("C://Users//USUARIO//Downloads//BIMBOA.MX.csv")[,5]
+bimbot<- ts(bimbo,frequency = 252, start = 2017)
+##vamos a revisar si la serie es estacionaria
+##eso lo hacemos con el adf.test
+require (fpp)
+adf.test(bimbot)
+##en esta prueba esperamos un p-value menor a 0.5
+##sin embargo en la serie bimbot obtenemos un p-value
+##de 0.8 por lo que hay que aplicar una diferenciación
+##paraconvertir la serie en estacionaria..
+dbimbot<-diff(bimbot)## diferenciacion a la st para convertirla en estacioneria
+adf.test(dbimbot)
+##ahora que tenemos la st estacionaria ya podemos 
+##aplicar un modelo arima, por lo que hay que elegir los valores de p,d, y q para elegir 
+##los valores de p y q se utiliza la funcion de autocorrelación (acf)
+##y la función de autocorrelación parcial (pacf)
+## primero aplicamos la función de autocorrelación para elegir el valor de q
+x11()
+acf(dbimbot)
+##una vez que apliquemos el acf vamos a observar la
+##grafica y ver cuantas lineas sobrepasa el margen
+##y el numero de lineas son el valor de q
+pacf(dbimbot)
+
+mod1bim<-Arima(bimbot, order=c(0,1,0))
+mod1bim
+
+mod2bim<-Arima(bimbot, order=c(1,1,2))
+mod2bim
+
+mod3bim<-Arima(bimbot, order=c(3,1,2))
+mod3bim
+
+mod4bim<-Arima(bimbot, order=c(2,1,2))
+mod4bim## elegimos el mod4bim
+mod4 <- forecast(mod4bim,h=12)
+plot (forecast(mod4bim,h=12),include=45)
+mod5bim<- auto.arima(bimbot)
+mod5bim
+plot (forecast(mod5bim,h=12),include=45)
+
+
+###ELEGIR DOS SERIES DE TIEMPO DIFERENTES
+### A LAS QUE HEMOS VISTO EN CLASE Y REPETIR EL PROCEDIMIENTO
+###PARA ELEGIR UN MODELO ARIMA "MEJOR" SEGUN LOS CRITERIOS AICC Y
+### COMPARALOS CON EL MODELO AUTO.ARIMA
+
+acci<-read.csv("C://Users//USUARIO//Documents//serie1.csv")
+accits<- ts(acci,frequency = 12, start = 1997)
+
+require (fpp)
+adf.test(accits)
+
+daccits<-diff(accits)## diferenciacion a la st para convertirla en estacioneria
+adf.test(daccits)
+
+x11()
+acf(daccits)
+
+pacf(daccits)
+
+mod1ac<-Arima(accits, order=c(0,1,0))
+mod1ac
+
+mod2ac<-Arima(accits, order=c(1,1,1))
+mod2ac
+
+mod3ac<-Arima(accits, order=c(3,1,2))
+mod3ac
+
+mod4ac<-Arima(accits, order=c(2,1,2))
+mod4ac
+mod1 <- forecast(mod1ac,h=12)
+x11()
+plot (forecast(mod1ac,h=12),include=45)
+mod5ac<- auto.arima(accits)
+mod5ac
+x11()
+plot (forecast(mod5ac,h=12),include=45)
+
+
+peso<-read.csv("C://Users//USUARIO//Documents//peso.csv")
+pesots<- ts(peso,frequency = 252, start = 2017)
+
+require (fpp)
+adf.test(pesots)
+
+dpesots<-diff(pesots)## diferenciacion a la st para convertirla en estacioneria
+adf.test(dpesots)
+
+x11()
+acf(dpesots)
+
+pacf(dpesots)
+
+mod1ps<-Arima(pesots, order=c(1,1,1))
+mod1ps
+
+mod2ps<-Arima(pesots, order=c(5,1,4))
+mod2ps
+
+mod3ps<-Arima(pesots, order=c(0,1,0))
+mod3ps
+
+mod4ps<-Arima(pesots, order=c(2,1,2))
+mod4ps
+mod2 <- forecast(mod2ps,h=12)
+x11()
+plot (forecast(mod2ps,h=12),include=45)
+mod5ps<- auto.arima(pesots)
+mod5ps
+x11()
+plot (forecast(mod5ps,h=12),include=45)
